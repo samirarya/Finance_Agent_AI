@@ -1,6 +1,6 @@
-crewai[tools]==1.14.5
-pydantic==2.10.1
-pydantic-settings==2.6.1
+crewai>=1.14.5
+pydantic>=2.11.9
+pydantic-settings
 langchain-ollama
 pinecone-client
 langchain-pinecone
