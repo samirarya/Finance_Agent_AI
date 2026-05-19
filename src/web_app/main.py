@@ -8,6 +8,9 @@ project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
+# Fix for ChromaDB / Pydantic v1 validation error on Python 3.14+
+os.environ["CHROMA_SERVER_NOFILE"] = os.environ.get("CHROMA_SERVER_NOFILE", "100")
+
 import streamlit as st
 import pandas as pd
 # Import workflow after path setup
