@@ -1,0 +1,16 @@
+ticker,quantity,purchase_price,purchase_date,category
+AAPL,10,150.25,2023-01-15,Technology
+MSFT,5,240.50,2023-02-10,Technology
+GOOGL,8,105.75,2023-03-05,Technology
+AMZN,15,95.30,2023-01-20,Consumer Cyclical
+TSLA,12,180.40,2023-04-12,Consumer Cyclical
+VTI,20,210.00,2022-11-15,ETF
+BND,50,72.50,2022-12-01,Bond
+JNJ,10,165.00,2023-01-05,Healthcare
+PG,15,140.20,2023-02-28,Consumer Defensive
+XOM,20,110.50,2023-03-20,Energy
+VOO,10,380.00,2023-01-10,ETF
+SCHD,25,75.00,2023-02-15,ETF
+O,30,65.25,2023-03-01,Real Estate
+NVDA,5,220.00,2023-01-25,Technology
+BRK.B,8,305.00,2023-04-01,Financial Services

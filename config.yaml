@@ -1,0 +1,26 @@
+llm:
+  model_name: "gemini-flash-latest"
+  temperature: 0.2
+
+rag:
+  vector_db_path: "data/faiss_index"
+  chunk_size: 1000
+  chunk_overlap: 200
+
+apis:
+  market_data_provider: "yfinance" # or "alpha_vantage"
+  cache_ttl_minutes: 30
+
+agents:
+  - name: "Finance Q&A Agent"
+    description: "Handles general financial education queries"
+  - name: "Portfolio Analysis Agent"
+    description: "Reviews and analyzes user portfolios"
+  - name: "Market Analysis Agent"
+    description: "Provides real-time market insights"
+  - name: "Goal Planning Agent"
+    description: "Assists with financial goal setting and planning"
+  - name: "News Synthesizer Agent"
+    description: "Summarizes and contextualizes financial news"
+  - name: "Tax Education Agent"
+    description: "Explains tax concepts and account types"
