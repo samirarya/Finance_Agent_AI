@@ -1,15 +1,17 @@
 import sys
-from pathlib import Path
 import os
+from pathlib import Path
 
-# Add the project root to sys.path
-root_path = Path(__file__).resolve().parent.parent.parent
-if str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
+# Standardize pathing for Streamlit Cloud
+current_dir = Path(__file__).parent.resolve()
+project_root = current_dir.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
 import streamlit as st
-from src.workflow.crew_setup import run_finnie_workflow
 import pandas as pd
+# Import workflow after path setup
+from src.workflow.crew_setup import run_finnie_workflow
 
 st.set_page_config(page_title="Finnie - Your Personal Finance Agent", page_icon="💰", layout="wide")
 

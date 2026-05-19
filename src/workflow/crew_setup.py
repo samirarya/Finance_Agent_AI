@@ -1,14 +1,12 @@
+import os
+import time
+import re
 from crewai import Agent, Task, Crew, Process
 from src.rag.search import financial_knowledge_base_search
 from src.utils.market_tools import get_stock_quote
 from src.utils.portfolio_tools import read_portfolio_data, analyze_portfolio_diversification
 from src.utils.news_tools import get_stock_news
 from src.utils.goal_tools import calculate_retirement_savings, calculate_savings_goal
-import os
-import time
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # --- LLM Configurations ---
 GEMINI_LLM = "gemini/gemini-2.5-flash"

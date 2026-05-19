@@ -1,9 +1,6 @@
 import os
 import requests
 from crewai.tools import tool
-from dotenv import load_dotenv
-
-load_dotenv()
 
 @tool("get_stock_quote")
 def get_stock_quote(symbol: str) -> str:

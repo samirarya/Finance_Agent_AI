@@ -1,10 +1,12 @@
+crewai[tools]==1.14.5
+pydantic==2.10.1
+pydantic-settings==2.6.1
 langchain-ollama
 pinecone-client
 langchain-pinecone
 langchain-google-genai
 langchain-community
 langchain-text-splitters
-crewai
 langchain
 langgraph
 google-generativeai
@@ -12,7 +14,6 @@ streamlit
 yfinance
 alpha_vantage
 pandas
-python-dotenv
 pyyaml
 pytest
 plotly
