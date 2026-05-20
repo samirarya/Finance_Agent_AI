@@ -3,41 +3,55 @@ from crewai.tools import tool
 import os
 from pathlib import Path
 
-# Resolve the absolute path to the portfolio CSV
-PROJECT_ROOT = Path(__file__).parent.parent.parent.resolve()
-PORTFOLIO_PATH = os.path.join(PROJECT_ROOT, "data", "test_data", "sample_portfolio.csv")
+def get_actual_portfolio_path():
+    """
+    Robustly finds the sample_portfolio.csv file regardless of environment.
+    """
+    # Try relative to this file
+    base_path = Path(__file__).parent.parent.parent.resolve()
+    path = os.path.join(base_path, "data", "test_data", "sample_portfolio.csv")
+    if os.path.exists(path):
+        return path
+    
+    # Fallback: Try current working directory
+    fallback_path = os.path.join(os.getcwd(), "data", "test_data", "sample_portfolio.csv")
+    if os.path.exists(fallback_path):
+        return fallback_path
+    
+    return path # Return the first one anyway if both fail
 
 @tool("read_portfolio_data")
 def read_portfolio_data(**kwargs) -> str:
     """
-    MANDATORY tool for ANY question about what the user owns, stock quantities, or portfolio contents.
-    You MUST call this tool to see the actual data. This tool accepts NO parameters (it uses internal data).
+    Reads the user's REAL portfolio holdings. It takes NO parameters.
     """
+    target_path = get_actual_portfolio_path()
+    print(f"DEBUG: Portfolio tool is attempting to read facts from: {target_path}")
+    
     try:
-        # Ignore any hallucinated arguments (like file_path) and use the internal path
-        if not os.path.exists(PORTFOLIO_PATH):
-            return f"Error: Portfolio file not found at {PORTFOLIO_PATH}"
+        if not os.path.exists(target_path):
+            return f"Error: The portfolio data file was not found at {target_path}. Please ensure data/test_data/sample_portfolio.csv exists."
             
-        df = pd.read_csv(PORTFOLIO_PATH)
+        df = pd.read_csv(target_path)
         holdings = []
         for _, row in df.iterrows():
-            holdings.append(f"Ticker: {row['ticker']}, Quantity: {row['quantity']}, Purchase Price: ${row['purchase_price']}, Category: {row['category']}")
+            holdings.append(f"Ticker: {row['ticker']}, Quantity: {row['quantity']}, Category: {row['category']}")
         
-        return "Current Portfolio Holdings:\n" + "\n".join(holdings)
+        return "Actual Portfolio Data Found:\n" + "\n".join(holdings)
     except Exception as e:
         return f"Error reading portfolio facts: {e}"
 
 @tool("analyze_portfolio_diversification")
 def analyze_portfolio_diversification(**kwargs) -> str:
     """
-    Analyzes the diversification of the user's portfolio by category. 
-    This tool accepts NO parameters (it uses internal data).
+    Analyzes the REAL user's portfolio diversification. It takes NO parameters.
     """
+    target_path = get_actual_portfolio_path()
     try:
-        if not os.path.exists(PORTFOLIO_PATH):
-            return f"Error: Portfolio facts not found at {PORTFOLIO_PATH}"
+        if not os.path.exists(target_path):
+            return f"Error: Portfolio facts not found at {target_path}"
 
-        df = pd.read_csv(PORTFOLIO_PATH)
+        df = pd.read_csv(target_path)
         df['total_value'] = df['quantity'] * df['purchase_price']
         total_portfolio_value = df['total_value'].sum()
         
