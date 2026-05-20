@@ -4,17 +4,17 @@ import os
 from pathlib import Path
 
 # Resolve the absolute path to the portfolio CSV
-# This tool file is in src/utils/, so project root is two levels up.
 PROJECT_ROOT = Path(__file__).parent.parent.parent.resolve()
 PORTFOLIO_PATH = os.path.join(PROJECT_ROOT, "data", "test_data", "sample_portfolio.csv")
 
 @tool("read_portfolio_data")
-def read_portfolio_data() -> str:
+def read_portfolio_data(**kwargs) -> str:
     """
     MANDATORY tool for ANY question about what the user owns, stock quantities, or portfolio contents.
-    You MUST call this tool to see the actual data. It requires NO input parameters.
+    You MUST call this tool to see the actual data. This tool accepts NO parameters (it uses internal data).
     """
     try:
+        # Ignore any hallucinated arguments (like file_path) and use the internal path
         if not os.path.exists(PORTFOLIO_PATH):
             return f"Error: Portfolio file not found at {PORTFOLIO_PATH}"
             
@@ -25,23 +25,22 @@ def read_portfolio_data() -> str:
         
         return "Current Portfolio Holdings:\n" + "\n".join(holdings)
     except Exception as e:
-        return f"Error reading portfolio file: {e}"
+        return f"Error reading portfolio facts: {e}"
 
 @tool("analyze_portfolio_diversification")
-def analyze_portfolio_diversification() -> str:
+def analyze_portfolio_diversification(**kwargs) -> str:
     """
-    Analyzes the diversification of the user's portfolio by category and returns the percentage breakdown.
+    Analyzes the diversification of the user's portfolio by category. 
+    This tool accepts NO parameters (it uses internal data).
     """
     try:
         if not os.path.exists(PORTFOLIO_PATH):
-            return f"Error: Portfolio file not found at {PORTFOLIO_PATH}"
+            return f"Error: Portfolio facts not found at {PORTFOLIO_PATH}"
 
         df = pd.read_csv(PORTFOLIO_PATH)
-        # Calculate total value per row (approximation using purchase_price)
         df['total_value'] = df['quantity'] * df['purchase_price']
         total_portfolio_value = df['total_value'].sum()
         
-        # Group by category
         category_breakdown = df.groupby('category')['total_value'].sum() / total_portfolio_value * 100
         
         result = "Portfolio Diversification Breakdown:\n"
@@ -50,4 +49,4 @@ def analyze_portfolio_diversification() -> str:
         
         return result
     except Exception as e:
-        return f"Error analyzing portfolio: {e}"
+        return f"Error analyzing portfolio facts: {e}"
