@@ -1,14 +1,24 @@
 import pandas as pd
 from crewai.tools import tool
+import os
+from pathlib import Path
+
+# Resolve the absolute path to the portfolio CSV
+# This tool file is in src/utils/, so project root is two levels up.
+PROJECT_ROOT = Path(__file__).parent.parent.parent.resolve()
+PORTFOLIO_PATH = os.path.join(PROJECT_ROOT, "data", "test_data", "sample_portfolio.csv")
 
 @tool("read_portfolio_data")
-def read_portfolio_data(file_path: str = "data/test_data/sample_portfolio.csv") -> str:
+def read_portfolio_data() -> str:
     """
-    Reads portfolio data from a CSV file and returns a highly detailed list of holdings.
-    Use this to find specific quantities, purchase prices, or categories for tickers.
+    Reads the user's portfolio data and returns a highly detailed list of holdings.
+    Use this to find specific quantities, purchase prices, or categories for tickers in the user's account.
     """
     try:
-        df = pd.read_csv(file_path)
+        if not os.path.exists(PORTFOLIO_PATH):
+            return f"Error: Portfolio file not found at {PORTFOLIO_PATH}"
+            
+        df = pd.read_csv(PORTFOLIO_PATH)
         holdings = []
         for _, row in df.iterrows():
             holdings.append(f"Ticker: {row['ticker']}, Quantity: {row['quantity']}, Purchase Price: ${row['purchase_price']}, Category: {row['category']}")
@@ -18,12 +28,15 @@ def read_portfolio_data(file_path: str = "data/test_data/sample_portfolio.csv") 
         return f"Error reading portfolio file: {e}"
 
 @tool("analyze_portfolio_diversification")
-def analyze_portfolio_diversification(file_path: str = "data/test_data/sample_portfolio.csv") -> str:
+def analyze_portfolio_diversification() -> str:
     """
-    Analyzes the diversification of the portfolio by category and returns the percentage breakdown.
+    Analyzes the diversification of the user's portfolio by category and returns the percentage breakdown.
     """
     try:
-        df = pd.read_csv(file_path)
+        if not os.path.exists(PORTFOLIO_PATH):
+            return f"Error: Portfolio file not found at {PORTFOLIO_PATH}"
+
+        df = pd.read_csv(PORTFOLIO_PATH)
         # Calculate total value per row (approximation using purchase_price)
         df['total_value'] = df['quantity'] * df['purchase_price']
         total_portfolio_value = df['total_value'].sum()
