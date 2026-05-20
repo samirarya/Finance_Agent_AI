@@ -4,12 +4,16 @@ from crewai.tools import tool
 @tool("read_portfolio_data")
 def read_portfolio_data(file_path: str = "data/test_data/sample_portfolio.csv") -> str:
     """
-    Reads portfolio data from a CSV file and returns it as a formatted string.
-    The CSV should have columns: ticker, quantity, purchase_price, purchase_date, category.
+    Reads portfolio data from a CSV file and returns a highly detailed list of holdings.
+    Use this to find specific quantities, purchase prices, or categories for tickers.
     """
     try:
         df = pd.read_csv(file_path)
-        return df.to_string(index=False)
+        holdings = []
+        for _, row in df.iterrows():
+            holdings.append(f"Ticker: {row['ticker']}, Quantity: {row['quantity']}, Purchase Price: ${row['purchase_price']}, Category: {row['category']}")
+        
+        return "Current Portfolio Holdings:\n" + "\n".join(holdings)
     except Exception as e:
         return f"Error reading portfolio file: {e}"
 
