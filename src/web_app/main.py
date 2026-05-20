@@ -3,6 +3,11 @@ import os
 from pathlib import Path
 
 # Standardize pathing for Streamlit Cloud
+# Add current directory and project root to sys.path
+cwd = os.getcwd()
+if cwd not in sys.path:
+    sys.path.insert(0, cwd)
+
 current_dir = Path(__file__).parent.resolve()
 project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:

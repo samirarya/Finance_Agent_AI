@@ -1,7 +1,10 @@
-crewai[tools]>=1.14.5
-pydantic>=2.0.0
+crewai
+crewai-tools
+pydantic
 pydantic-settings
+langchain-openai
 langchain-ollama
+
 pinecone-client
 langchain-pinecone
 langchain-google-genai
