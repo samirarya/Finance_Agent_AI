@@ -10,7 +10,7 @@ from src.utils.goal_tools import calculate_retirement_savings, calculate_savings
 
 # --- LLM Configurations ---
 PRIMARY_LLM = "gemini/gemini-2.5-flash"
-SECONDARY_LLM = "gpt-4o-mini"
+SECONDARY_LLM = "gpt-4o"
 TERTIARY_LLM = "ollama/llama3.1"
 
 def create_hierarchical_crew(user_query, model_name):
