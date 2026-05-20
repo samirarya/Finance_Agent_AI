@@ -14,13 +14,13 @@ os.environ["CHROMA_SERVER_NOFILE"] = os.environ.get("CHROMA_SERVER_NOFILE", "100
 import streamlit as st
 import pandas as pd
 # Import workflow after path setup
-from src.workflow.crew_setup import run_finnie_workflow
+from src.workflow.crew_setup import run_sammy_workflow
 
-st.set_page_config(page_title="Finnie - Your Personal Finance Agent", page_icon="💰", layout="wide")
+st.set_page_config(page_title="Sammy - Your Personal Finance Agent", page_icon="💰", layout="wide")
 
 # Sidebar for Portfolio and Settings
 with st.sidebar:
-    st.title("💰 Finnie AI")
+    st.title("💰 Sammy AI")
     st.markdown("---")
     
     st.subheader("Your Portfolio")
@@ -42,7 +42,7 @@ with st.sidebar:
     st.info("LangSmith Tracing is enabled in the background.")
 
 # Main Chat Interface
-st.title("Finnie - Personal Finance Agent")
+st.title("Sammy - Personal Finance Agent")
 st.markdown("Democratizing financial literacy through multi-agent AI.")
 
 # Initialize chat history
@@ -63,11 +63,11 @@ if prompt := st.chat_input("Ask me about your portfolio, market news, or financi
 
     with st.chat_message("assistant"):
         message_placeholder = st.empty()
-        message_placeholder.markdown("🤔 *Finnie is thinking and coordinating agents...*")
+        message_placeholder.markdown("🤔 *Sammy is thinking and coordinating agents...*")
         
         try:
             # Run the CrewAI workflow
-            response = run_finnie_workflow(prompt)
+            response = run_sammy_workflow(prompt)
             
             # Display assistant response
             message_placeholder.markdown(response)
@@ -76,7 +76,7 @@ if prompt := st.chat_input("Ask me about your portfolio, market news, or financi
         except Exception as e:
             error_str = str(e)
             if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
-                user_friendly_error = "⚠️ **Finnie is experiencing high demand right now.** \n\nThe underlying AI model has reached its temporary limit. Please wait about 60 seconds and try your request again. We appreciate your patience!"
+                user_friendly_error = "⚠️ **Sammy is experiencing high demand right now.** \n\nThe underlying AI model has reached its temporary limit. Please wait about 60 seconds and try your request again. We appreciate your patience!"
                 message_placeholder.markdown(user_friendly_error)
                 st.session_state.messages.append({"role": "assistant", "content": user_friendly_error})
             else:

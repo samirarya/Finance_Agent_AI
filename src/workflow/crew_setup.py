@@ -104,7 +104,7 @@ def create_fallback_crew(user_query, model_name):
     or when running as a last resort.
     """
     generalist_agent = Agent(
-        role='Finnie Generalist',
+        role='Sammy Generalist',
         goal='Provide accurate and honest financial answers. If you are unsure or the data is unclear, say so. Do NOT make up numbers.',
         backstory='You are a meticulous financial assistant. You provide only the final answer in clean language.',
         llm=model_name,
@@ -135,9 +135,9 @@ def create_fallback_crew(user_query, model_name):
         verbose=True
     )
 
-def run_finnie_workflow(user_query):
+def run_sammy_workflow(user_query):
     """
-    Orchestrates the Finnie Agent workflow with three-tier fallback logic:
+    Orchestrates the Sammy Agent workflow with three-tier fallback logic:
     Gemini -> OpenAI -> Local Llama
     """
     # 1. Attempt Gemini (Primary)

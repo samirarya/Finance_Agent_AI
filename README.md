@@ -1,6 +1,6 @@
-# Finnie - Personal Finance Agent 💰
+# Sammy - Personal Finance Agent 💰
 
-Finnie is a multi-agent conversational AI system designed to democratize financial literacy. It provides personalized financial education, portfolio analysis, and goal planning using real-time market data and a curated knowledge base.
+Sammy is a multi-agent conversational AI system designed to democratize financial literacy. It provides personalized financial education, portfolio analysis, and goal planning using real-time market data and a curated knowledge base.
 
 ## 🚀 Key Features
 
@@ -55,7 +55,7 @@ Finnie is a multi-agent conversational AI system designed to democratize financi
 
 ## 🌐 Deployment
 
-Finnie is designed to be hosted on **Streamlit Community Cloud** and integrated into your portfolio at **samiraryamane.com**.
+Sammy is designed to be hosted on **Streamlit Community Cloud** and integrated into your portfolio at **samiraryamane.com**.
 
 1. Push your code to a GitHub repository.
 2. Connect the repository to [Streamlit Cloud](https://share.streamlit.io/).
