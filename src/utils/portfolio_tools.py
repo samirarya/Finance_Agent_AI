@@ -11,8 +11,8 @@ PORTFOLIO_PATH = os.path.join(PROJECT_ROOT, "data", "test_data", "sample_portfol
 @tool("read_portfolio_data")
 def read_portfolio_data() -> str:
     """
-    Reads the user's portfolio data and returns a highly detailed list of holdings.
-    Use this to find specific quantities, purchase prices, or categories for tickers in the user's account.
+    MANDATORY tool for ANY question about what the user owns, stock quantities, or portfolio contents.
+    You MUST call this tool to see the actual data. It requires NO input parameters.
     """
     try:
         if not os.path.exists(PORTFOLIO_PATH):

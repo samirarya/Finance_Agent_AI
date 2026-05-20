@@ -124,9 +124,9 @@ def create_fallback_crew(user_query, model_name):
     )
 
     task = Task(
-        description=f"Answer the user query: {user_query}. Present ONLY the final answer. NO JSON.",
+        description=f"Answer the user query: {user_query}. If the query is about the user's specific holdings, stocks, or quantities owned, you MUST call the 'read_portfolio_data' tool first to see the facts. Present ONLY the final answer. NO JSON.",
         agent=generalist_agent,
-        expected_output="A direct, human-friendly final answer to the question."
+        expected_output="A direct, human-friendly final answer grounded in the tool data."
     )
 
     return Crew(
