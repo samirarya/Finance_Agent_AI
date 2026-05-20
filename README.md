@@ -12,6 +12,7 @@ Finnie is a multi-agent conversational AI system designed to democratize financi
   - **Goal Planning Agent:** Retirement and savings goal calculations.
   - **News Synthesizer Agent:** Contextualizes market news via Yahoo Finance.
   - **Tax Education Agent:** Explains complex tax concepts and account types.
+- **3-Tier LLM Resilience:** Automated fallback sequence: Gemini 2.5 Flash → OpenAI GPT-4o → Local Llama 3.1 (Ollama).
 - **RAG Knowledge Base:** 110+ curated articles indexed in a high-dimensional Pinecone vector store.
 - **Observability:** Full tracing and monitoring integrated with LangSmith.
 
