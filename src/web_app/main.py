@@ -47,21 +47,6 @@ with st.sidebar:
         
         # Quick Stats (Removing Net Value)
         st.metric("Total Holdings", len(df))
-            
-        # Portfolio Composition Pie Chart (By quantity since price is removed)
-        st.markdown("### Composition")
-        # Grouping by category and counting tickers for the pie chart
-        category_counts = df.groupby('category').size().reset_index(name='count')
-        fig = px.pie(category_counts, values='count', names='category', 
-                     hole=0.4,
-                     color_discrete_sequence=px.colors.qualitative.Pastel)
-        fig.update_layout(
-            showlegend=True,
-            legend=dict(orientation="h", yanchor="top", y=-0.05, xanchor="center", x=0.5, font=dict(size=10)),
-            margin=dict(t=0, b=0, l=0, r=0),
-            height=250
-        )
-        st.plotly_chart(fig, width='stretch', config={'displayModeBar': False})
     else:
         st.warning("No portfolio data found. Create a sample_portfolio.csv in data/test_data/")
 
