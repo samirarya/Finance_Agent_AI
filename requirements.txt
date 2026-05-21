@@ -5,7 +5,7 @@ pydantic-settings
 langchain-openai
 langchain-ollama
 
-pinecone-client
+pinecone
 langchain-pinecone
 langchain-google-genai
 langchain-community
